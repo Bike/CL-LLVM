@@ -74,9 +74,11 @@
   (with-pointer-to-list (pointer type (count-struct-element-types struct-ty))
     (get-struct-element-types struct-ty pointer)))
 (defcfun (packed-struct-p "LLVMIsPackedStruct") :boolean (struct-ty type))
-(defcfun* "LLVMStructCreateNamed" type
+(defcfun (%struct-create-named "LLVMStructCreateNamed") type
   (c context)
   (name :string))
+(defun struct-create-named (name &key (context (global-context)))
+  (%struct-create-named context name))
 (defcfun* "LLVMGetStructName" :string
   (struct type))
 (defcfun (%struct-set-body "LLVMStructSetBody") :void
