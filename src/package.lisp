@@ -106,6 +106,7 @@
            #:value-as-basic-block #:basic-block-parent #:count-basic-blocks
            #:basic-blocks #:first-basic-block #:last-basic-block
            #:next-basic-block #:previous-basic-block #:entry-basic-block
+           #:create-basic-block
            #:append-basic-block #:insert-basic-block #:delete-basic-block
            #:move-basic-block-before #:move-basic-block-after
            #:instruction-parent #:first-instruction #:last-instruction

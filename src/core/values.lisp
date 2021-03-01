@@ -279,6 +279,8 @@
 (defun basic-blocks (fn)
   (with-pointer-to-list (pointer basic-block (count-basic-blocks fn))
     (get-basic-blocks fn pointer)))
+(defcfun (basic-block-terminator "LLVMGetBasicBlockTerminator") value
+  (bb basic-block))
 (defcfun (first-basic-block "LLVMGetFirstBasicBlock") basic-block (fn value))
 (defcfun (last-basic-block "LLVMGetLastBasicBlock") basic-block (fn value))
 (defcfun (next-basic-block "LLVMGetNextBasicBlock") basic-block
@@ -287,6 +289,10 @@
   (bb basic-block))
 (defcfun (entry-basic-block "LLVMGetEntryBasicBlock") basic-block (fn value))
 
+(defcfun* "LLVMCreateBasicBlockInContext" basic-block
+  (c context) (name :string))
+(defun create-basic-block (name &key (context (global-context)))
+  (create-basic-block-in-context context name))
 (defcfun* "LLVMAppendBasicBlockInContext" basic-block
   (c context) (fn value) (name :string))
 (defun append-basic-block (fn name &key (context (global-context)))
